@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Welcome to Spring-Boot</title>
+</head>
+<body>
+<h1>Welcome to YHJ parser</h1>
+<hr>
+<a href="javascript:void(0);" onclick="showDiv(1)">通过HTML内容解析</a>&nbsp;
+<a href="javascript:void(0);" onclick="showDiv(2)">通过URL解析</a>&nbsp;
+<a href="javascript:void(0);" onclick="showDiv(3)">通过文件解析</a>&nbsp;
+<a href="javascript:void(0);" onclick="showDiv(4)">使用选择器</a>&nbsp;
+<br/>
+<div id="d1" style="display: none">
+    <form id="d1-form" action="/parseByHtml" method="post" target="_blank">
+    <table border="0">
+        <tr><td>HTML内容：</td><td>
+    <textarea rows="15" cols="100" name="html">
+        <!doctype html>
+        <html>
+            <head><title>YHJ Html Page</title></head>
+            <body id='body'>
+                Body节点
+                <h1 id='h1'>
+                    H1节点带SPAN
+                    <span id='yhj-sp'>SPAN节点</span>
+                </h1>
+            </body>
+        </html>
+    </textarea>
+        </td>
+        </tr>
+    <tr>
+        <td>
+            筛选ID：
+        </td>
+        <td>
+            <input name="id" value="body">
+        </td>
+    </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="submit(1)">提交</button>
+            </td>
+        </tr>
+    </table>
+        </form>
+</div>
+<div id="d2" style="display: none">
+    <form id="d2-form" action="/parseByUrl" method="post" target="_blank">
+    <table border="0">
+        <tr><td>URL：</td>
+            <td>
+                <input style="width: auto" name="url" value="http://www.baidu.com">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="submit(2)">提交</button>
+            </td>
+        </tr>
+    </table>
+        </form>
+</div>
+<div id="d3" style="display: none">
+    <form id="d3-form" action="/parseByFile" method="post" target="_blank">
+    <table border="0">
+        <tr><td>文件地址：</td>
+            <td>
+                <input style="width: auto" name="path" value="C:\\work\\code\\html-parser\\src/main/resources/static/index.html">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="submit(3)">提交</button>
+            </td>
+        </tr>
+    </table>
+        </form>
+</div>
+<div id="d4" style="display: none">
+    <form id="d4-form" action="/parseBySelecter" method="post" target="_blank">
+        <table border="0">
+            <tr><td>URL：</td>
+                <td>
+                    <input name="url" value="http://passport.kedou.com/front/noLogin/login_front.jsp" style="width: auto" >
+                </td>
+            </tr>
+            <tr><td>选择器：</td>
+                <td>
+                    <input name="selecter" value=".login_box" style="width: auto" >
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button onclick="submit(2)">提交</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script type="application/javascript">
+    var divIds = [1,2,3];
+    var divPrefix = "d";
+    function getDom(id) {
+        return document.getElementById(id);
+    }
+    function show(id) {
+        getDom(id).style.display = "";
+    }
+    function hide(id) {
+        getDom(id).style.display = "none";
+    }
+    function showDiv(divId) {
+        for (var index in divIds){
+            hide(divPrefix+divIds[index]);
+        }
+        show(divPrefix+divId);
+    }
+    function submit(divId){
+        getDom(divPrefix+divId+"-form").submit();
+    }
+</script>
+</body>
+</html>
